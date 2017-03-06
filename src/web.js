@@ -15,8 +15,9 @@ app.post('/', require('body-parser').json(), async (req, res) => {
     params: apiaiRequest.result.parameters,
   };
   const aiResponse = await rp.post({ body: aiRequest });
-  const apiaiResponse = {
-    speech: aiResponse.say,
-  };
+  const apiaiResponse = {};
+  if (aiResponse.say) {
+    apiaiResponse.speech = aiResponse.say;
+  }
   res.send(apiaiResponse);
 });
