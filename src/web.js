@@ -1,4 +1,5 @@
 require('dotenv').config({ silent: true });
+const _ = require('lodash');
 
 const app = require('express')();
 app.listen(process.env.PORT);
@@ -11,8 +12,8 @@ const rp = require('request-promise').defaults({
 app.post('/', require('body-parser').json(), async (req, res) => {
   const apiaiRequest = req.body;
   const aiRequest = {
-    intent: apiaiRequest.result.metadata.intentName,
-    params: apiaiRequest.result.parameters,
+    intent: _.get(apiaiRequest, 'result.metadata.intentName'),
+    params: _.get(apiaiRequest, 'result.parameters'),
   };
   const aiResponse = await rp.post({ body: aiRequest });
   const apiaiResponse = {};
