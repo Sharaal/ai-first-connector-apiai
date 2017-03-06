@@ -12,7 +12,7 @@ const rp = require('request-promise').defaults({
 app.post('/', require('body-parser').json(), async (req, res) => {
   const apiaiRequest = req.body;
   const aiRequest = {
-    intent: _.get(apiaiRequest, 'result.metadata.intentName'),
+    name: _.get(apiaiRequest, 'result.metadata.intentName'),
     params: _.get(apiaiRequest, 'result.parameters'),
   };
   const aiResponse = await rp.post({ body: aiRequest });
