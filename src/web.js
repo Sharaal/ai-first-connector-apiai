@@ -27,6 +27,9 @@ app.post('/', require('body-parser').json(), async (req, res) => {
   if (aiResponse.say) {
     apiaiResponse.speech = aiResponse.say;
   }
+  if (aiResponse.display) {
+    apiaiResponse.displayText = `${aiResponse.display.title}: ${aiResponse.display.text}`;
+  }
   console.log(`(${id}) apiaiResponse: ${JSON.stringify(apiaiResponse)}`);
   res.send(apiaiResponse);
 });
