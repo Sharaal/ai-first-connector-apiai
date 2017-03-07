@@ -18,7 +18,14 @@ app.post('/', require('body-parser').json(), async (req, res) => {
     id,
     name: _.get(apiaiRequest, 'result.metadata.intentName'),
     params: _.get(apiaiRequest, 'result.parameters'),
-    session: {},
+    session: (() => {
+      const context = _.get(apiaiRequest, 'result.contexts', [])
+        .filter(context => context.name === 'session')[0];
+      if (!context) {
+        return {};
+      }
+      return context.parameters;
+    })(),
   };
   console.log(`(${id}) aiRequest: ${JSON.stringify(aiRequest)}`);
   const aiResponse = await rp.post({ body: aiRequest });
@@ -29,6 +36,9 @@ app.post('/', require('body-parser').json(), async (req, res) => {
   }
   if (aiResponse.display) {
     apiaiResponse.displayText = `${aiResponse.display.title}: ${aiResponse.display.text}`;
+  }
+  if (aiResponse.session) {
+    apiaiResponse.contextOut = [{ name: 'session', lifespan: 1, parameters: aiResponse.session }];
   }
   console.log(`(${id}) apiaiResponse: ${JSON.stringify(apiaiResponse)}`);
   res.send(apiaiResponse);
