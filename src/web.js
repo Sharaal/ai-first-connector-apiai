@@ -16,6 +16,7 @@ app.post('/', require('body-parser').json(), async (req, res) => {
   console.log(`(${id}) apiaiRequest: ${JSON.stringify(apiaiRequest)}`);
   const aiRequest = {
     id,
+    locale: _.get(apiaiRequest, 'lang'),
     name: _.get(apiaiRequest, 'result.metadata.intentName'),
     params: _.get(apiaiRequest, 'result.parameters'),
     session: (() => {
