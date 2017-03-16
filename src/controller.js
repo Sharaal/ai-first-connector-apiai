@@ -19,6 +19,10 @@ module.exports = ({ rp }) =>
         }
         return context.parameters;
       })(),
+      user: {
+        id: _.get(apiaiRequest, 'originalRequest.data.user.user_id'),
+        accessToken: _.get(apiaiRequest, 'originalRequest.data.user.access_token')
+      },
     };
     console.log(`(${id}) aiRequest: ${JSON.stringify(aiRequest)}`);
     const aiResponse = await rp.post({ body: aiRequest });
