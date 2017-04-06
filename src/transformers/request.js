@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-module.exports = (apiaiRequest) => ({
+module.exports = apiaiRequest => ({
   id: _.get(apiaiRequest, 'id', ''),
   locale: _.get(apiaiRequest, 'lang', ''),
   name: _.get(apiaiRequest, 'result.metadata.intentName', ''),
