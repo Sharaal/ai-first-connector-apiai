@@ -1,15 +1,8 @@
-const _ = require('lodash');
-const jwt = require('jsonwebtoken');
-
 module.exports = ({ rp, secret }) =>
   ['post', ['/', require('body-parser').json(), async (req, res) => {
     const apiaiRequest = req.body;
     let aiRequest, aiResponse, apiaiResponse, error;
-    const headers = {};
-    if (secret) {
-      const intent = _.get(apiaiRequest, 'result.metadata.intentId', '');
-      headers['jwt-token'] = jwt.sign({ connector: 'apiai', intent }, secret);
-    }
+    const headers = { secret };
     try {
       aiRequest = require('./transformers/request')(apiaiRequest);
       aiResponse = await rp.post({ body: aiRequest, headers });
