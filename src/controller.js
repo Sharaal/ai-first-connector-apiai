@@ -7,7 +7,7 @@ module.exports = ({ rp, secret }) =>
       aiResponse = await rp.post({ body: aiRequest, headers: { secret } });
       apiaiResponse = require('./transformers/response')(aiResponse);
     } catch (e) {
-      error = e;
+      error = e.message;
     }
     if (error) {
       console.error(JSON.stringify({ error, apiaiRequest, aiRequest, aiResponse, apiaiResponse }));
