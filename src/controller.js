@@ -9,6 +9,6 @@ module.exports = ({ rp, secret }) =>
     } catch (e) {
       error = e;
     }
-    console.log({ apiaiRequest, aiRequest, aiResponse, apiaiResponse, error });
+    console.log(JSON.stringify({ apiaiRequest, aiRequest, aiResponse, apiaiResponse, error }));
     res.send(apiaiResponse);
   }]];
