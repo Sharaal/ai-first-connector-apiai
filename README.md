@@ -52,14 +52,12 @@ Connector which transforms the API.ai specific JSON format in the request to an 
 
 ```json
 {
-  "connector": "apiai",
   "id": "67f7a66b-e03b-46b6-adf0-504d243a54c2",
   "locale": "en",
   "name": "newAssets",
   "params": {
     "genre": ""
   },
-  "secret": "...secret...",
   "session": {},
   "user": {
     "id": "",
