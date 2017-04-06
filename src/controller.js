@@ -1,9 +1,9 @@
-module.exports = ({ rp }) =>
+module.exports = ({ rp, secret }) =>
   ['post', ['/', require('body-parser').json(), async (req, res) => {
     const apiaiRequest = req.body;
     let aiRequest, aiResponse, apiaiResponse, error;
     try {
-      aiRequest = require('./transformers/request')(apiaiRequest);
+      aiRequest = require('./transformers/request')(apiaiRequest, { secret });
       aiResponse = await rp.post({ body: aiRequest });
       apiaiResponse = require('./transformers/response')(aiResponse);
     } catch (e) {

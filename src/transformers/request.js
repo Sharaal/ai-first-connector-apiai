@@ -1,10 +1,13 @@
 const _ = require('lodash');
 
-module.exports = apiaiRequest => ({
+module.exports = (apiaiRequest, { secret }) => ({
+  application: '',
+  connector: 'apiai',
   id: _.get(apiaiRequest, 'id', ''),
   locale: _.get(apiaiRequest, 'lang', ''),
   name: _.get(apiaiRequest, 'result.metadata.intentName', ''),
   params: _.get(apiaiRequest, 'result.parameters', {}),
+  secret: secret,
   session: (() => {
     const context = _.get(apiaiRequest, 'result.contexts', [])
       .filter(context => context.name === 'session')[0];
