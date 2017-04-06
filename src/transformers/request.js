@@ -1,7 +1,6 @@
 const _ = require('lodash');
 
 module.exports = (apiaiRequest, { secret }) => ({
-  application: '',
   connector: 'apiai',
   id: _.get(apiaiRequest, 'id', ''),
   locale: _.get(apiaiRequest, 'lang', ''),

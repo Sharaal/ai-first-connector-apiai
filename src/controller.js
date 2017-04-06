@@ -1,12 +1,9 @@
-module.exports = ({ applications, rp, secret }) =>
+module.exports = ({ rp, secret }) =>
   ['post', ['/', require('body-parser').json(), async (req, res) => {
     const apiaiRequest = req.body;
     let aiRequest, aiResponse, apiaiResponse, error;
     try {
       aiRequest = require('./transformers/request')(apiaiRequest, { secret });
-      if (applications && !applications.includes(aiRequest.application)) {
-        throw new Error('incorrect application');
-      }
       aiResponse = await rp.post({ body: aiRequest });
       apiaiResponse = require('./transformers/response')(aiResponse);
     } catch (e) {
