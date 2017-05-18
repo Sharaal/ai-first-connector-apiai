@@ -2,7 +2,6 @@ module.exports = ({ rp, secret }) => [
   'post',
   [
     '/',
-    require('body-parser').json(),
     async (req, res) => {
       const apiaiRequest = req.body;
       let aiRequest;
@@ -10,7 +9,7 @@ module.exports = ({ rp, secret }) => [
       let apiaiResponse;
       try {
         aiRequest = require('./transformers/request')(apiaiRequest);
-        aiResponse = await rp.post({ body: aiRequest, headers: { secret } });
+        aiResponse = await rp.post({ body: aiRequest });
         apiaiResponse = require('./transformers/response')(aiResponse);
         console.log(
           JSON.stringify({ apiaiRequest, aiRequest, aiResponse, apiaiResponse })
