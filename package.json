@@ -5,7 +5,7 @@
   },
   "name": "@ai-first/connector-apiai",
   "version": "1.0.0",
-  "description": "",
+  "description": "Transforms the API.ai JSON format in the request to an internal AI JSON format and back for the response",
   "repository": "sharaal/ai-first-connector-apiai",
   "license": "UNLICENSED",
   "publishConfig": {
