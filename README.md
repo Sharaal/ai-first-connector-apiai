@@ -1,9 +1,3 @@
-[![Dependency Status](https://david-dm.org/dragonprojects/ai-connector-apiai.svg)](https://david-dm.org/dragonprojects/ai-connector-apiai)
-[![devDependency Status](https://david-dm.org/dragonprojects/ai-connector-apiai/dev-status.svg)](https://david-dm.org/dragonprojects/ai-connector-apiai?type=dev)
-
-Connector which transforms the API.ai specific JSON format in the request to an internal AI JSON format and back for the response.
-
-
 # Example Workflow
 
 ## API.ai Request
