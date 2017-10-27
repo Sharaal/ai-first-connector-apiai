@@ -1,4 +1,6 @@
-const _ = require('lodash');
+const _ = {
+  get: require('lodash.get'),
+};
 
 module.exports = apiaiRequest => ({
   id: _.get(apiaiRequest, 'id', ''),
@@ -6,9 +8,7 @@ module.exports = apiaiRequest => ({
   name: _.get(apiaiRequest, 'result.metadata.intentName', ''),
   params: _.get(apiaiRequest, 'result.parameters', {}),
   session: (() => {
-    const context = _.get(apiaiRequest, 'result.contexts', []).filter(
-      context => context.name === 'session'
-    )[0];
+    const context = _.get(apiaiRequest, 'result.contexts', []).filter(context => context.name === 'session')[0];
     if (!context) {
       return {};
     }
@@ -16,10 +16,6 @@ module.exports = apiaiRequest => ({
   })(),
   user: {
     id: _.get(apiaiRequest, 'originalRequest.data.user.user_id', ''),
-    accessToken: _.get(
-      apiaiRequest,
-      'originalRequest.data.user.access_token',
-      ''
-    ),
+    accessToken: _.get(apiaiRequest, 'originalRequest.data.user.access_token', ''),
   },
 });

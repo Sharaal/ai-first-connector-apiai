@@ -1,9 +1,11 @@
-const _ = require('lodash');
+const _ = {
+  get: require('lodash.get'),
+};
 
 module.exports = aiResponse => ({
   speech: _.get(aiResponse, 'say', ''),
   displayText: (() => {
-    if (_.has(aiResponse, 'display')) {
+    if (_.get(aiResponse, 'display')) {
       return `${_.get(aiResponse, 'display.title', '')}: ${_.get(aiResponse, 'display.text', '')}`;
     }
   })(),
