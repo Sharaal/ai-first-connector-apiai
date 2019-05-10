@@ -1,5 +1,7 @@
 # Example Workflow
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Sharaal/ai-first-connector-apiai.svg)](https://greenkeeper.io/)
+
 ## API.ai Request
 
 ```json
